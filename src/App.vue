@@ -1,10 +1,20 @@
 <template>
   <div class="wrapper">
-    <img class="cover rellax" data-rellax-speed="1" src="./assets/cover.png" />
-    <img class="light rellax" data-rellax-speed="10" src="./assets/light.png" />
-    <ProgressBar v-show="shouldShowProgressBar" />
-    <div id="fullview">
-      <About />
+    <div>
+      <img
+        class="cover rellax"
+        data-rellax-speed="1"
+        src="./assets/cover.png"
+      />
+      <img
+        class="light rellax"
+        data-rellax-speed="10"
+        src="./assets/light.png"
+      />
+    </div>
+    <ProgressBar v-show="shouldShowProgressBar && !isMobile" />
+    <div id="content" data-rellax-speed="10">
+      <About :isMobile="isMobile" />
       <Preview />
       <Sample />
     </div>
@@ -28,6 +38,7 @@ export default {
   data() {
     return {
       shouldShowProgressBar: false,
+      isMobile: true,
     };
   },
   mounted() {
@@ -36,7 +47,6 @@ export default {
       .scene({
         triggerElement: "#content",
         triggerHook: 0,
-        // duration: 1000,
       })
       .on("enter leave", (e) => {
         this.shouldShowProgressBar = e.type === "enter";
@@ -45,6 +55,9 @@ export default {
 
     // Add Scene to controller
     this.$scrollmagic.addScene(scene);
+    if (window.innerWidth > 768) {
+      this.isMobile = false;
+    }
   },
   methods: {},
 };
@@ -55,6 +68,9 @@ export default {
 
 .wrapper {
   background: #b48746;
+  overflow: hidden;
+  width: 100vw;
+  position: relative;
 }
 
 .cover {

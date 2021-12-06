@@ -33,6 +33,11 @@ export default {
     color: #fff;
     transform: translate(5px, 0);
     @media (min-width: 768px) {
+      transform: translate(15px, 0);
+      font-size: 144px;
+      line-height: 180px;
+    }
+    @media (min-width: 1200px) {
       transform: translate(20px, 0);
       font-size: 194px;
       line-height: 242px;
@@ -44,9 +49,13 @@ export default {
     font-size: 13px;
     line-height: 19px;
     color: #000;
-    transform: translate(0, -50%);
+    transform: translate(-13px, -50%);
     @media (min-width: 768px) {
-      font-weight: 100;
+      font-size: 36px;
+      line-height: 52px;
+      transform: translate(-36px, -50%);
+    }
+    @media (min-width: 1200px) {
       font-size: 48px;
       line-height: 70px;
     }
