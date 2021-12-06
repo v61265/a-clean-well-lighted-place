@@ -14,9 +14,9 @@
     </div>
     <ProgressBar v-show="shouldShowProgressBar && !isMobile" />
     <div id="content" data-rellax-speed="10">
-      <About :isMobile="isMobile" />
-      <Preview />
-      <Sample />
+      <About ref="about" class="section" :isMobile="isMobile" />
+      <Preview ref="preview" class="section" />
+      <Sample ref="sample" class="section" />
     </div>
   </div>
 </template>
@@ -42,6 +42,9 @@ export default {
     };
   },
   mounted() {
+    if (window.innerWidth > 768) {
+      this.isMobile = false;
+    }
     new Rellax(".rellax");
     const scene = this.$scrollmagic
       .scene({
@@ -52,12 +55,8 @@ export default {
         this.shouldShowProgressBar = e.type === "enter";
       });
     // .addIndicators({ name: "2 (duration: 300)" });
-
     // Add Scene to controller
     this.$scrollmagic.addScene(scene);
-    if (window.innerWidth > 768) {
-      this.isMobile = false;
-    }
   },
   methods: {},
 };
